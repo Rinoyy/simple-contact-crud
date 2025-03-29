@@ -17,21 +17,16 @@ function addData(event) {
     GetAllcontacts[group] = [];
   }
 
-  //push degan tujuan untuk data lama dan baru tetap tidak hilang
   GetAllcontacts[group].push({ id, username, email, number, group });
-
-  //setItem menambahkan data
   localStorage.setItem("contacts", JSON.stringify(GetAllcontacts));
-
   window.location.reload();
 }
 
 function addId(group) {
   let filterGroup = GetAllcontacts[group] || [];
-  
 
   if (filterGroup.length > 0) {
-    let lastContact = filterGroup.at(-1).id;  
+    let lastContact = filterGroup.at(-1).id;
     return Number(lastContact);
   } else {
     return 0;
@@ -40,35 +35,32 @@ function addId(group) {
 
 // localStorage.clear()
 
+function GetData() {
+  let GetAllcontacts = JSON.parse(localStorage.getItem("contacts")) || {};
+  let tableBody = document.getElementById("contact-list");
+  tableBody.innerHTML = "";
 
-// document.getElementById("formData").addEventListener("submit", function () {
-//   let group = document.getElementById("group").value;
+  for (let group in GetAllcontacts) {
+    GetAllcontacts[group].forEach((contact) => {
+      let row = `<tr>
+        <td>${contact.id}</td>
+        <td>${contact.username}</td>
+        <td>${contact.email}</td>
+        <td>${contact.number}</td>
+        <td>${contact.group}</td>
+      </tr>`;
+      tableBody.innerHTML += row;
+    });
+  }
+}
 
-//   console.log(GetAllcontacts[group]);
-// });
+// localStorage.clear();
+GetData()
 
-// function updateGroup(event) {
-//   event.preventDefault();
-//   group = document.getElementById("group").value; // Update nilai dari select
-//   console.log("Grup dipilih:", group);
-// }
 
-// Logika Tambah data
 
-// -Ambil data dari inputan
-// -masukkan kedalam let bungkus pakai array
-// -ambil seluruh data dengan tujuan untuk simpan data karna ketika kita tambahkan lagi data lama akan hilang
-//  dari data yang sudah kita ambil dan tampung didalam variable.
-// - kita push hasil inputan kedalam variable select data sementara dengan tujuan akan kita push uang
 
-// Logika addID
 
-// - karna kita sudah tampung datanya kedalam variable GetAllcontacts
-// - ketika  if (GetAllcontacts.length > 0) {  berarti sudah ada isinya akan jalankan logika untuk ambil id terakhir nya
-//  dengan tujuan untuk kirim ke fungsi addData + 1
-// - pada blok kode if  kita ambil .at(-1) berarti kita ambil array terakhir lalu kita [0]  dengan arti ambil value pertama.
-// - setelah itu kita inisialisasi dari variable lastContact kedalam GetlastId
-// - karna GetlastId sudah punya data yaitu id terakhir dari kontak maka kita return datanya agar ketika sebuah fungsi fi panggil
-//   sudah mempunyai data.
 
-// Logika untuk grouping data
+
+
