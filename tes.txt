@@ -17,10 +17,8 @@ function addData(event) {
     GetAllcontacts[group] = [];
   }
 
-  //push degan tujuan untuk data lama dan baru tetap tidak hilang
   GetAllcontacts[group].push({ id, username, email, number, group });
 
-  //setItem menambahkan data
   localStorage.setItem("contacts", JSON.stringify(GetAllcontacts));
 
   window.location.reload();
@@ -28,10 +26,9 @@ function addData(event) {
 
 function addId(group) {
   let filterGroup = GetAllcontacts[group] || [];
-  
 
   if (filterGroup.length > 0) {
-    let lastContact = filterGroup.at(-1).id;  
+    let lastContact = filterGroup.at(-1).id;
     return Number(lastContact);
   } else {
     return 0;
@@ -39,6 +36,11 @@ function addId(group) {
 }
 
 // localStorage.clear()
+
+
+
+
+
 
 
 // document.getElementById("formData").addEventListener("submit", function () {
